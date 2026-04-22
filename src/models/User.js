@@ -72,6 +72,16 @@ const UserSchema = new mongoose.Schema({
   favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
   reports: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
   isActive: { type: Boolean, default: true },
+
+  // Mobile push notification tokens
+  pushTokens: [{
+    token: { type: String },
+    platform: { type: String, enum: ['android', 'ios'] },
+    updatedAt: { type: Date, default: Date.now },
+  }],
+
+  // Refresh token for mobile long-lived sessions
+  refreshToken: { type: String, select: false },
 }, { timestamps: true });
 
 UserSchema.index({ location: '2dsphere' });
