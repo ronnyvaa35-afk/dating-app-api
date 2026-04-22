@@ -10,7 +10,15 @@ router.post('/register', [
   body('email').isEmail().withMessage('Valid email required'),
   body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters'),
   body('age').isInt({ min: 18 }).withMessage('Must be at least 18'),
-  body('gender').isIn(['male', 'female', 'non-binary', 'other']).withMessage('Invalid gender'),
+  body('gender').isIn([
+    'man', 'woman', 'non-binary', 'genderqueer', 'genderfluid',
+    'transgender man', 'transgender woman', 'agender', 'two-spirit',
+    'intersex', 'questioning', 'other',
+  ]).withMessage('Invalid gender'),
+  body('sexualOrientation').isIn([
+    'gay', 'lesbian', 'bisexual', 'pansexual', 'queer',
+    'asexual', 'demisexual', 'fluid', 'questioning', 'other',
+  ]).withMessage('Invalid sexual orientation'),
 ], register);
 
 router.post('/login', login);
